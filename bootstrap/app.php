@@ -11,6 +11,7 @@
 |
 */
 
+// 实例化 Illuminate\Foundation\Application，laravel应用实例，也就是所谓的 IoC 容器。
 $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
@@ -25,6 +26,11 @@ $app = new Illuminate\Foundation\Application(
 | incoming requests to this application from both the web and CLI.
 |
 */
+
+// 绑定了3个核心类
+//App\Http\Kernel::class              // 处理http请求
+//App\Console\Kernel::class           // 处理cli请求
+//App\Exceptions\Handler::class       // 异常处理
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
