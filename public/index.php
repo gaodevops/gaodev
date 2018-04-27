@@ -11,7 +11,7 @@ define('LARAVEL_START', microtime(true));
 
 /*
 |--------------------------------------------------------------------------
-| Register The Auto Loader
+| Register The Auto Loader 注册自动加载程序 加载项目依赖
 |--------------------------------------------------------------------------
 |
 | Composer provides a convenient, automatically generated class loader for
@@ -25,7 +25,9 @@ require __DIR__.'/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
-| Turn On The Lights
+| Turn On The Lights 创建应用实例（或称服务容器）
+| 创建服务容器的过程即为应用初始化的过程，项目初始化时将完成包括：注册项目基础服务、
+| 注册项目服务提供者别名、注册目录路径等在内的一些列注册工作。
 |--------------------------------------------------------------------------
 |
 | We need to illuminate PHP development, so let us turn on the lights.
@@ -50,9 +52,17 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 */
 
 // 实例化了http内核
+    //在实例化内核时，构造函数内将在 HTTP 内核定义的「中间件组」注册到 路由器，注册完后就可以在实际处理
+    // HTTP 请求前调用这些「中间件」实现 过滤 请求的目的。
+    // Illuminate\Foundation\Http\Kernel
+    // \Illuminate\Routing\Router
+
+
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 // 经 handle() 处理后，返回响应
+    // Illuminate\Foundation\Http\Kernel
+
 $response = $kernel->handle(
 
     // 捕获HTTP请求，交给 http内核 handle() 来处理
@@ -60,6 +70,7 @@ $response = $kernel->handle(
 );
 
 // 将响应返回
+ // 发送响应由 Illuminate\Http\Response 父类 Symfony\Component\HttpFoundation\Response 中的 send() 方法完成。
 $response->send();
 
 // 执行 http内核 的terminate()方法

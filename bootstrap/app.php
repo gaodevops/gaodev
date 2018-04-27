@@ -12,6 +12,9 @@
 */
 
 // 实例化 Illuminate\Foundation\Application，laravel应用实例，也就是所谓的 IoC 容器。
+// 创建应用实例
+// 在创建 APP 容器主要会完成：注册应用的基础路径并将路径绑定到 APP 容器 、注册基础服务提供者至 APP 容器 、
+//注册核心容器别名至 APP 容器 等基础服务的注册工作。
 $app = new Illuminate\Foundation\Application(
     realpath(__DIR__.'/../')
 );
@@ -29,7 +32,11 @@ $app = new Illuminate\Foundation\Application(
 
 // 绑定了3个核心类
 //App\Http\Kernel::class              // 处理http请求
+
+
 //App\Console\Kernel::class           // 处理cli请求
+
+
 //App\Exceptions\Handler::class       // 异常处理
 
 $app->singleton(
