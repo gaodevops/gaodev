@@ -42,9 +42,14 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'jwt', // // 原来是 token 改成jwt
             'provider' => 'users',
         ],
+
+//        'api' => [
+//            'driver' => 'token',
+//            'provider' => 'users',
+//        ],
     ],
 
     /*
