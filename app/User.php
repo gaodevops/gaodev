@@ -17,6 +17,16 @@ class User extends Authenticatable implements JWTSubject    # 这里别忘了加
     use Notifiable;
 
     /**
+     * 自定义接收者 邮件频道的路由
+     *
+     * @return string
+     */
+    public function routeNotificationForMail()
+    {
+        return $this->email_address;
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
